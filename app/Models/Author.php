@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-class Author
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Author extends Model
 {
-    public static function all()
+    use HasFactory;
+
+    protected $fillable = ['name', 'bio'];
+
+    public function books()
     {
-        return [
-            ['id' => 1, 'name' => 'J.K. Rowling', 'bio' => 'British author of Harry Potter series'],
-            ['id' => 2, 'name' => 'Stephen King', 'bio' => 'American author of horror and suspense'],
-            ['id' => 3, 'name' => 'Agatha Christie', 'bio' => 'English mystery writer'],
-            ['id' => 4, 'name' => 'Dan Brown', 'bio' => 'American thriller author'],
-            ['id' => 5, 'name' => 'Jane Austen', 'bio' => 'English novelist of romantic fiction'],
-        ];
+        return $this->hasMany(Book::class);
     }
 }
