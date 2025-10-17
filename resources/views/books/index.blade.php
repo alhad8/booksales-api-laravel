@@ -9,15 +9,21 @@
     <h1>Daftar Buku</h1>
     
     <a href="/">Home</a> | 
-    <a href="/authors">Daftar Author</a>
+    <a href="/authors">Daftar Author</a> | 
+    <a href="/genres">Daftar Genre</a>
+    
+    <br><br>
     
     <table border="1" cellpadding="10">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Judul Buku</th>
+                <th>Judul</th>
                 <th>Deskripsi</th>
-                <th>Tanggal Terbit</th>
+                <th>Harga</th>
+                <th>Stok</th>
+                <th>Cover</th>
+                <th>Genre</th>
                 <th>Author</th>
             </tr>
         </thead>
@@ -27,7 +33,10 @@
                 <td>{{ $book->id }}</td>
                 <td>{{ $book->title }}</td>
                 <td>{{ $book->description }}</td>
-                <td>{{ $book->publish_date }}</td>
+                <td>Rp {{ number_format($book->price, 0, ',', '.') }}</td>
+                <td>{{ $book->stock }}</td>
+                <td>{{ $book->cover_photo }}</td>
+                <td>{{ $book->genre->name }}</td>
                 <td>{{ $book->author->name }}</td>
             </tr>
             @endforeach
