@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    /**
-     * Display a listing of all genres
-     */
+    
     public function index()
     {
         $genres = Genre::all();
@@ -21,9 +19,6 @@ class GenreController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created genre
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([

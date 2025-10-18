@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    /**
-     * Display a listing of all authors
-     */
+    
     public function index()
     {
         $authors = Author::all();
@@ -21,9 +19,6 @@ class AuthorController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created author
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
