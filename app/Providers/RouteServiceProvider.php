@@ -18,8 +18,9 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->routes(function () {
-            // Route API — tanp prefix dulu untuk tes
+            // Route API dengan prefix /api
             Route::middleware('api')
+                ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
             // Route WEB
