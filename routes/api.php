@@ -12,9 +12,11 @@ Route::prefix('books')->group(function () {
 });
 
 Route::prefix('authors')->group(function () {
-    Route::get('/', [AuthorController::class, 'index']);
+    Route::get('/', [AuthorController::class, 'index']);        
+    Route::post('/', [AuthorController::class, 'store']);       
 });
 
 Route::prefix('genres')->group(function () {
-    Route::get('/', [GenreController::class, 'index']);
+    Route::get('/', [GenreController::class, 'index']);         
+    Route::post('/', [GenreController::class, 'store']);        
 });
