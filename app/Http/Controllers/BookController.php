@@ -57,4 +57,54 @@ class BookController extends Controller
             'data' => $book
         ], 200);
     }
+
+    public function update(Request $request, $id)
+    {
+        $book = Book::find($id);
+
+        if (!$book) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Buku tidak ditemukan'
+            ], 404);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'cover_photo' => 'nullable|string',
+            'genre_id' => 'required|exists:genres,id',
+            'author_id' => 'required|exists:authors,id',
+        ]);
+
+        $book->update($validated);
+        $book->load(['author', 'genre']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Buku berhasil diupdate',
+            'data' => $book
+        ], 200);
+    }
+
+    public function destroy($id)
+    {
+        $book = Book::find($id);
+
+        if (!$book) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Buku tidak ditemukan'
+            ], 404);
+        }
+
+        $book->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Buku berhasil dihapus'
+        ], 200);
+    }
 }

@@ -5,18 +5,11 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\GenreController;
 
-Route::prefix('books')->group(function () {
-    Route::get('/', [BookController::class, 'index']);
-    Route::post('/', [BookController::class, 'store']);
-    Route::get('/{id}', [BookController::class, 'show']);
-});
+// API Resource Routes untuk Books
+Route::apiResource('books', BookController::class);
 
-Route::prefix('authors')->group(function () {
-    Route::get('/', [AuthorController::class, 'index']);        
-    Route::post('/', [AuthorController::class, 'store']);       
-});
+// API Resource Routes untuk Authors
+Route::apiResource('authors', AuthorController::class);
 
-Route::prefix('genres')->group(function () {
-    Route::get('/', [GenreController::class, 'index']);         
-    Route::post('/', [GenreController::class, 'store']);        
-});
+// API Resource Routes untuk Genres
+Route::apiResource('genres', GenreController::class);

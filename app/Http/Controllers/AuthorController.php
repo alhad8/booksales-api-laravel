@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    
     public function index()
     {
         $authors = Author::all();
@@ -34,5 +33,68 @@ class AuthorController extends Controller
             'message' => 'Author berhasil ditambahkan',
             'data' => $author
         ], 201);
+    }
+
+    public function show($id)
+    {
+        $author = Author::find($id);
+
+        if (!$author) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Author tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data author berhasil diambil',
+            'data' => $author
+        ], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $author = Author::find($id);
+
+        if (!$author) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Author tidak ditemukan'
+            ], 404);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'photo' => 'nullable|string',
+            'bio' => 'nullable|string',
+        ]);
+
+        $author->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Author berhasil diupdate',
+            'data' => $author
+        ], 200);
+    }
+
+    public function destroy($id)
+    {
+        $author = Author::find($id);
+
+        if (!$author) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Author tidak ditemukan'
+            ], 404);
+        }
+
+        $author->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Author berhasil dihapus'
+        ], 200);
     }
 }
