@@ -5,6 +5,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TransactionController;
+
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
@@ -38,4 +40,16 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::post('books', [BookController::class, 'store']);
     Route::put('books/{id}', [BookController::class, 'update']);
     Route::delete('books/{id}', [BookController::class, 'destroy']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('transactions', [TransactionController::class, 'store']);
+    Route::get('transactions/{id}', [TransactionController::class, 'show']);
+    Route::put('transactions/{id}', [TransactionController::class, 'update']);
+});
+
+Route::middleware(['auth:api', 'admin'])->group(function () {
+    Route::get('transactions', [TransactionController::class, 'index']);
+    Route::delete('transactions/{id}', [TransactionController::class, 'destroy']);
+});
+    
 });
