@@ -37,19 +37,27 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::put('genres/{id}', [GenreController::class, 'update']);
     Route::delete('genres/{id}', [GenreController::class, 'destroy']);
     
+    Route::middleware(['auth:api', 'admin'])->group(function () {
+    Route::post('authors', [AuthorController::class, 'store']);
+    Route::put('authors/{id}', [AuthorController::class, 'update']);
+    Route::delete('authors/{id}', [AuthorController::class, 'destroy']);
+    
+    Route::post('genres', [GenreController::class, 'store']);
+    Route::put('genres/{id}', [GenreController::class, 'update']);
+    Route::delete('genres/{id}', [GenreController::class, 'destroy']);
+    
     Route::post('books', [BookController::class, 'store']);
     Route::put('books/{id}', [BookController::class, 'update']);
     Route::delete('books/{id}', [BookController::class, 'destroy']);
+    
+    Route::get('transactions', [TransactionController::class, 'index']);
+    Route::delete('transactions/{id}', [TransactionController::class, 'destroy']);
+});
 
 Route::middleware('auth:api')->group(function () {
     Route::post('transactions', [TransactionController::class, 'store']);
     Route::get('transactions/{id}', [TransactionController::class, 'show']);
     Route::put('transactions/{id}', [TransactionController::class, 'update']);
-});
-
-Route::middleware(['auth:api', 'admin'])->group(function () {
-    Route::get('transactions', [TransactionController::class, 'index']);
-    Route::delete('transactions/{id}', [TransactionController::class, 'destroy']);
 });
     
 });

@@ -16,8 +16,8 @@ class BookSeeder extends Seeder
                 'price' => 185000,
                 'stock' => 30,
                 'cover_photo' => 'dance_with_dragons.jpg',
-                'genre_id' => 1, // Fantasy
-                'author_id' => 1, // George R.R. Martin
+                'genre_id' => 1, 
+                'author_id' => 1, 
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -27,8 +27,8 @@ class BookSeeder extends Seeder
                 'price' => 150000,
                 'stock' => 25,
                 'cover_photo' => 'gone_girl.jpg',
-                'genre_id' => 2, // Thriller
-                'author_id' => 2, // Gillian Flynn
+                'genre_id' => 2, 
+                'author_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -38,8 +38,8 @@ class BookSeeder extends Seeder
                 'price' => 160000,
                 'stock' => 28,
                 'cover_photo' => 'the_martian.jpg',
-                'genre_id' => 3, // Science Fiction
-                'author_id' => 3, // Andy Weir
+                'genre_id' => 3, 
+                'author_id' => 3, 
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -49,8 +49,8 @@ class BookSeeder extends Seeder
                 'price' => 135000,
                 'stock' => 22,
                 'cover_photo' => 'spiderverse.jpg',
-                'genre_id' => 4, // Superhero
-                'author_id' => 4, // Stan Lee
+                'genre_id' => 4, 
+                'author_id' => 4, 
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -60,8 +60,8 @@ class BookSeeder extends Seeder
                 'price' => 128000,
                 'stock' => 20,
                 'cover_photo' => 'ironman_extremis.jpg',
-                'genre_id' => 4, // Superhero
-                'author_id' => 4, // Stan Lee
+                'genre_id' => 4, 
+                'author_id' => 4, 
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -71,8 +71,8 @@ class BookSeeder extends Seeder
                 'price' => 145000,
                 'stock' => 35,
                 'cover_photo' => 'blood_of_olympus.jpg',
-                'genre_id' => 5, // Adventure
-                'author_id' => 5, // Rick Riordan
+                'genre_id' => 5,
+                'author_id' => 5,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

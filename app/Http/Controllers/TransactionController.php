@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    // READ ALL - Admin only
     public function index()
     {
         $transactions = Transaction::with(['user', 'book'])->get();
@@ -20,7 +19,6 @@ class TransactionController extends Controller
         ], 200);
     }
 
-    // CREATE - Authenticated customer
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -28,10 +26,8 @@ class TransactionController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        // Get book data
         $book = Book::findOrFail($validated['book_id']);
         
-        // Check stock
         if ($book->stock < $validated['quantity']) {
             return response()->json([
                 'success' => false,
@@ -39,13 +35,10 @@ class TransactionController extends Controller
             ], 400);
         }
 
-        // Calculate total amount
         $totalAmount = $book->price * $validated['quantity'];
 
-        // Generate order number
         $orderNumber = 'ORD-' . str_pad(Transaction::count() + 1, 4, '0', STR_PAD_LEFT);
 
-        // Create transaction
         $transaction = Transaction::create([
             'order_number' => $orderNumber,
             'customer_id' => auth()->id(),
@@ -53,7 +46,6 @@ class TransactionController extends Controller
             'total_amount' => $totalAmount,
         ]);
 
-        // Update book stock
         $book->decrement('stock', $validated['quantity']);
 
         $transaction->load(['user', 'book']);
@@ -65,7 +57,6 @@ class TransactionController extends Controller
         ], 201);
     }
 
-    // SHOW - Authenticated customer (own transaction only)
     public function show($id)
     {
         $transaction = Transaction::with(['user', 'book'])->find($id);
@@ -77,7 +68,6 @@ class TransactionController extends Controller
             ], 404);
         }
 
-        // Check if user owns this transaction
         if ($transaction->customer_id !== auth()->id()) {
             return response()->json([
                 'success' => false,
@@ -92,7 +82,6 @@ class TransactionController extends Controller
         ], 200);
     }
 
-    // UPDATE - Authenticated customer (own transaction only)
     public function update(Request $request, $id)
     {
         $transaction = Transaction::find($id);
@@ -104,7 +93,6 @@ class TransactionController extends Controller
             ], 404);
         }
 
-        // Check if user owns this transaction
         if ($transaction->customer_id !== auth()->id()) {
             return response()->json([
                 'success' => false,
@@ -116,10 +104,8 @@ class TransactionController extends Controller
             'book_id' => 'required|exists:books,id',
         ]);
 
-        // Get book data
         $book = Book::findOrFail($validated['book_id']);
 
-        // Recalculate total amount (assuming quantity is 1 for simplicity)
         $transaction->update([
             'book_id' => $validated['book_id'],
             'total_amount' => $book->price,
@@ -134,7 +120,6 @@ class TransactionController extends Controller
         ], 200);
     }
 
-    // DELETE - Admin only
     public function destroy($id)
     {
         $transaction = Transaction::find($id);
