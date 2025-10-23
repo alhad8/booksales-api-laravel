@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
             $table->decimal('total_amount', 10, 2);
-            $table->timestamps(); // ✅ otomatis buat created_at & updated_at yang valid
+            $table->timestamps(); 
         });
     }
 
