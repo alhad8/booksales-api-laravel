@@ -31,7 +31,6 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    // JWT Methods
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -44,7 +43,6 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    // Helper method untuk check role
     public function isAdmin()
     {
         return $this->role === 'admin';
